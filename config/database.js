@@ -6,7 +6,7 @@ module.exports = {
         'password': 'pbkksembilan4', // şifreniz 
         'database': 'servernine4'// database ismi .
     },
-	'database': 'pbkksembilan4',
+	'database': 'servernine4',
 };
 
 	
