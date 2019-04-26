@@ -88,39 +88,27 @@ module.exports = function(passport) {
     // we are using named strategies since we have one for login and one for signup
     // by default, if there was no name, it would just be called 'local'
     
-        passport.use(
+    passport.use(
         'local-login',
         new LocalStrategy({
-            // by default, local strategy uses username and password, we will override with email
-//            nrpField : 'u_nrp',
-            usernameField : 'u_nama',
-            passwordField : 'u_password',
-//            roleField : 'u_role',
-            passReqToCallback : true // allows us to pass back the entire request to the callback
+            
+            usernameField : 'username',
+            passwordField : 'password',
+            passReqToCallback : true 
         },
-
-        function(u_nama, u_password, done) { // callback with email and password from our form
-//            var u_nrp = req.body.u_nrp;
-//            var u_nama = req.body.u_nama;
-//            var u_password = req.body.u_password;
-//            var u_role = req.body.u_role;
-
-            console.log("login");
-            connection.query("SELECT * FROM users WHERE u_nama = ?",[u_nama], function(err, rows){
+        function(req, username, password, done) { 
+            connection.query("SELECT * FROM users WHERE nrp = ?",[username], function(err, rows){
                 if (err)
-                    console.log(err);
                     return done(err);
                 if (!rows.length) {
-                    console.log("test");
-                    return done(null, false, req.flash('loginMessage', 'No user found.')); // req.flash is the way to set flashdata using connect-flash
+                    return done(null, false, req.flash('loginMessage', 'No user found!.')); 
                 }
 
-
-                // if the user is found but the password is wrong
+           
                 if (!bcrypt.compareSync(password, rows[0].password))
-                    return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
+                    return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
 
-                // all is well, return successful user
+          
                 return done(null, rows[0]);
             });
         })
