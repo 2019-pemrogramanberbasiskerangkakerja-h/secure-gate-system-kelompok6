@@ -10,7 +10,7 @@ module.exports = function(app,passport) {
     
     app.get('/',isLoggedIn,function(req,res){
         var row = [];
-        var row2=[];
+        var row2= [];
         connection.query('select * from users where id = ?',[req.user.id], function (err, rows) {
             if (err) {
                 console.log(err);
@@ -73,4 +73,3 @@ function isLoggedIn(req,res,next){
 		return next();
 	res.redirect('/login');
 }
-
