@@ -1,13 +1,12 @@
 // config/database.js
 module.exports = {
     'connection': {
-        'host': 'localhost', // localde iseniz bu , local değilse ip adresini yazınız .
-        'user': 'root', // kullanıcı adı 
-        'password': '', // şifreniz 
-        'database': 'pbkk2'// database ismi .
+        'host': 'db4free.net', // localde iseniz bu , local değilse ip adresini yazınız .
+        'user': 'pbkksembilan4', // kullanıcı adı 
+        'password': 'pbkksembilan4', // şifreniz 
+        'database': 'servernine4'// database ismi .
     },
-	'database': 'pbkk2',
-    
+	'database': 'pbkksembilan4',
 };
 
 	
