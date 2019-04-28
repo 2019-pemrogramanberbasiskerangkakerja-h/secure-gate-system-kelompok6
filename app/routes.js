@@ -25,18 +25,18 @@ module.exports = function(app,passport) {
                 
             }
 
-            res.render('index.ejs', {rows : row}); // user.ejs ye gönderiyoruz . 
+            res.render('index.tl', {rows : row}); // user.ejs ye gönderiyoruz . 
         });
     });
 
     app.get('/login', function(req, res) {
 
-        res.render('login.ejs',{ message: req.flash('loginMessage') });
+        res.render('login.tl',{ message: req.flash('loginMessage') });
 
     });
 
     app.get('/signup', function(req, res){
-        res.render('signup.ejs',{message: req.flash('message')});
+        res.render('signup.tl',{message: req.flash('message')});
       });
 
     app.post('/signup', passport.authenticate('local-signup', {
