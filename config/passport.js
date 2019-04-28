@@ -67,25 +67,61 @@ module.exports = function(passport) {
     passport.use(
         'local-login',
         new LocalStrategy({
-            
             usernameField : 'id',
             passwordField : 'password',
             passReqToCallback : true 
         },
         function(req, id, password, done) { 
+            var insertQuery = "INSERT INTO log ( id, L_DATE, L_STATUS ) values (?,?,?)";
+
+            var today = new Date();
+            var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
             connection.query("SELECT * FROM users WHERE id = ?",[id], function(err, rows){
-                if (err)
+                if (err){
+                    var newUserLogin = {
+                        id:id,
+                        L_DATE: time,
+                        L_STATUS: 0
+                    };
                     return done(err);
-                if (!rows.length) {
-                    return done(null, false, req.flash('loginMessage', 'bulunamadi.')); 
+ 
                 }
+                if (!rows.length) {
+                    var newUserLogin = {
+                        id:id,
+                        L_DATE: time,
+                        L_STATUS: 0
+                    }; 
+                    connection.query(insertQuery,[newUserLogin.id, newUserLogin.L_DATE, newUserLogin.L_STATUS],function(err, rows) {
+                    });
 
-           
-                if (!bcrypt.compareSync(password, rows[0].password))
-                    return done(null, false, req.flash('loginMessage', 'yanlis parola.'));
+                    return done(null, false, req.flash('loginMessage', 'gagal login.'));
+ 
+                }
+                if (!bcrypt.compareSync(password, rows[0].password)){
+                    var newUserLogin = {
+                        id:id,
+                        L_DATE: time,
+                        L_STATUS: 0
+                    };
 
-          
-                return done(null, rows[0]);
+                     connection.query(insertQuery,[newUserLogin.id, newUserLogin.L_DATE, newUserLogin.L_STATUS],function(err, rows) {
+                    });
+                    return done(null, false, req.flash('loginMessage', 'password salah'));
+ 
+                }
+                var newUserLogin = {
+                    id:id,
+                    L_DATE: time,
+                    L_STATUS: 1
+                };    
+                
+                connection.query(insertQuery,[newUserLogin.id, newUserLogin.L_DATE, newUserLogin.L_STATUS],function(err, rows) {
+                });
+
+                return done(null, rows[0]);  
+
+
             });
         })
     );
