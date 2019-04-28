@@ -12,6 +12,8 @@ var port     = process.env.PORT || 3000;
 var passport = require('passport');
 var flash    = require('connect-flash');
 
+const tl = require('express-tl');
+
 require('./config/passport.js')(passport); 
 
 
@@ -22,9 +24,11 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
+app.engine('tl',tl);
+
 app.use(express.static(__dirname + '/views'));
 
-app.set('view engine', 'ejs'); // set up ejs for templating
+app.set('view engine', 'tl'); // set up ejs for templating
 
 // required for passport
 app.use(session({
