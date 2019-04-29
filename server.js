@@ -17,8 +17,8 @@ const tl = require('express-tl');
 require('./config/passport.js')(passport); 
 
 
-app.use(morgan('dev')); // log every request to the console
-app.use(cookieParser()); // read cookies (needed for auth)
+app.use(morgan('dev')); 
+app.use(cookieParser()); 
 app.use(bodyParser.urlencoded({
     extended: true
 }));
@@ -28,21 +28,20 @@ app.engine('tl',tl);
 
 app.use(express.static(__dirname + '/views'));
 
-app.set('view engine', 'tl'); // set up ejs for templating
-
+app.set('view engine', 'tl'); 
 // required for passport
 app.use(session({
-    secret: 'kodizimcomisrunning',
+    secret: 'pbkk9',
     resave: true,
     saveUninitialized: true
  } )); // session secret
 app.use(passport.initialize());
-app.use(passport.session()); // persistent login sessions
-app.use(flash()); // use connect-flash for flash messages stored in session
+app.use(passport.session()); 
+app.use(flash()); 
 
 
 // routes ======================================================================
-require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
+require('./app/routes.js')(app, passport); 
 
 // launch ======================================================================
 app.listen(port);

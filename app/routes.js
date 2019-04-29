@@ -23,7 +23,6 @@ module.exports = function(app,passport) {
                 }
                 console.log(row);
             }
-            // res.render('index.tl', {rows : row}); // user.ejs ye gönderiyoruz . 
             res.render('index', {
                     nama: req.user.username,
                     nrp : req.user.id,
@@ -34,10 +33,8 @@ module.exports = function(app,passport) {
         });
     });
 
-    app.get('/login', function(req, res) {
-
+    app.get('/login', function(req, res , next) {
         res.render('login.tl',{ message: req.flash('loginMessage') });
-
     });
 
     app.get('/signup', function(req, res){
@@ -57,15 +54,14 @@ module.exports = function(app,passport) {
         }),
         function(req, res) {
             console.log("hello");
-
             if (req.body.remember) {
               req.session.cookie.maxAge = 1000 * 60 * 3;
             } else {
               req.session.cookie.expires = false;
             }
         res.redirect('/');
-
     });
+
     app.get('/logout', function(req, res) {
         req.logout();
         res.redirect('/');
@@ -75,8 +71,9 @@ module.exports = function(app,passport) {
 };
 
 function isLoggedIn(req,res,next){
-	if(req.isAuthenticated())
+	if(req.isAuthenticated()){
 		return next();
-	res.redirect('/login');
+    }else{
+        res.redirect('/login');
+    }
 }
-

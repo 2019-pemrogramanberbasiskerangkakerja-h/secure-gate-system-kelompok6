@@ -7,7 +7,9 @@ var connection = mysql.createConnection(dbconfig.connection);
 
 connection.query('USE ' + dbconfig.database);
 
-module.exports = function(passport) {
+module.exports = function(passport) 
+
+{
 
     passport.serializeUser(function(user, done) {
         done(null, user.id);
@@ -23,16 +25,13 @@ module.exports = function(passport) {
     passport.use(
         'local-signup',
         new LocalStrategy({
-            // by default, local strategy uses username and password, we will override with email
             nrpField : 'id',
             usernameField : 'username',
             passwordField : 'password',
             roleField : 'role',
-            passReqToCallback : true // allows us to pass back the entire request to the callback
+            passReqToCallback : true 
         },
         function(req,id,username, done) {
-            // find a user whose email is the same as the forms email
-            // we are checking to see if the user trying to login already exists
             var id = req.body.id;
             var username = req.body.username;
             var password = req.body.password;
@@ -43,12 +42,10 @@ module.exports = function(passport) {
                 if (rows.length) {
                     return done(null, false, req.flash('signupMessage', 'That nrp is already taken.'));
                 } else {
-                    // if there is no user with that username
-                    // create the user
                     var newUserMysql = {
                         id:id,
                         username: username,
-                        password: bcrypt.hashSync(password, null, null), // use the generateHash function in our user model
+                        password: bcrypt.hashSync(password, null, null), 
                         role:role
                     };
 
@@ -63,7 +60,7 @@ module.exports = function(passport) {
         })
     );
 
-
+    // passport.use(new LocalStrategy(user.authenticate()));
     passport.use(
         'local-login',
         new LocalStrategy({
