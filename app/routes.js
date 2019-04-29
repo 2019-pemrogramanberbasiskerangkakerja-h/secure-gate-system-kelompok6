@@ -22,10 +22,15 @@ module.exports = function(app,passport) {
                     }  
                 }
                 console.log(row);
-                
             }
+            // res.render('index.tl', {rows : row}); // user.ejs ye gönderiyoruz . 
+            res.render('index', {
+                    nama: req.user.username,
+                    nrp : req.user.id,
+                    role : req.user.role
+                });
+            // res.render('index.tl', {rows : row});  
 
-            res.render('index.tl', {rows : row}); // user.ejs ye gönderiyoruz . 
         });
     });
 
@@ -59,6 +64,7 @@ module.exports = function(app,passport) {
               req.session.cookie.expires = false;
             }
         res.redirect('/');
+
     });
     app.get('/logout', function(req, res) {
         req.logout();

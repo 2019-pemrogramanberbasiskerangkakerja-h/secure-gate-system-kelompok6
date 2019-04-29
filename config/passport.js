@@ -76,40 +76,32 @@ module.exports = function(passport) {
 
             var today = new Date();
             var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-            connection.query("SELECT * FROM users WHERE id = ?",[id], function(err, rows){
+             connection.query("SELECT * FROM users , memiliki , gerbang WHERE users.id = ? and users.id = memiliki.id and gerbang.K_ID = memiliki.K_ID and gerbang.K_JAMAWAL <= CAST(? as time) and gerbang.K_JAMAKHIR >= CAST(? as time)",[id , time , time],function(err, rows){
+                    var newUserLogin = {
+                    id:id,
+                    L_DATE: time,
+                    L_STATUS: 0
+                };
+
                 if (err){
-                    var newUserLogin = {
-                        id:id,
-                        L_DATE: time,
-                        L_STATUS: 0
-                    };
-                    return done(err);
- 
-                }
-                if (!rows.length) {
-                    var newUserLogin = {
-                        id:id,
-                        L_DATE: time,
-                        L_STATUS: 0
-                    }; 
                     connection.query(insertQuery,[newUserLogin.id, newUserLogin.L_DATE, newUserLogin.L_STATUS],function(err, rows) {
                     });
 
+                    return done(err);
+                }
+                if (!rows.length) {
+                    connection.query(insertQuery,[newUserLogin.id, newUserLogin.L_DATE, newUserLogin.L_STATUS],function(err, rows) {
+                    });
                     return done(null, false, req.flash('loginMessage', 'gagal login.'));
  
                 }
                 if (!bcrypt.compareSync(password, rows[0].password)){
-                    var newUserLogin = {
-                        id:id,
-                        L_DATE: time,
-                        L_STATUS: 0
-                    };
-
+                
                      connection.query(insertQuery,[newUserLogin.id, newUserLogin.L_DATE, newUserLogin.L_STATUS],function(err, rows) {
                     });
                     return done(null, false, req.flash('loginMessage', 'password salah'));
- 
                 }
+
                 var newUserLogin = {
                     id:id,
                     L_DATE: time,

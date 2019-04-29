@@ -24,21 +24,19 @@
 			<div class="well">
 				<h3><span class="fa fa-user"></span> Local</h3>
 					<p>
-						<!-- <% rows.forEach(function(rows) { %>
-							<strong>NRP</strong>: <%=rows.id%><br>  
-							<strong>Nama</strong> : <%=rows.username%><br>  
-							<strong>Role</strong> : <%=rows.role%>  
-					 	<% }); %> -->
 
-					 	<table>
+					 	<!-- <table> -->
 						  <thead>
 						    <tr>
-						      <th class='prop__name' data-prop-name='id'>NRP</th>
-						      <th class='prop__name' data-prop-name='username'>Nama</th>
-						      <th class='prop__name' data-prop-name='role'>Role</th>
+						      <th class='prop__name' data-prop-name='id'>NRP ${d.nrp}</th>
+						      <br>
+						      <th class='prop__name' data-prop-name='username'>Nama ${d.nama} </th>
+						      <br>
+						      <th class='prop__name' data-prop-name='role'>Role ${d.role}</th>
+						      <br>
 						    </tr>
 						  </thead>
-						</table>
+						<!-- </table> -->
 
 						<script type="text/javascript">
 							
