@@ -30,19 +30,24 @@
 							<strong>Role</strong> : <%=rows.role%>  
 					 	<% }); %> -->
 
-					 	<table>
-						  <thead>
-						    <tr>
-						      <th class='prop__name' data-prop-name='id'>NRP</th>
-						      <th class='prop__name' data-prop-name='username'>Nama</th>
-						      <th class='prop__name' data-prop-name='role'>Role</th>
-						    </tr>
-						  </thead>
-						</table>
+					 	
 
-						<script type="text/javascript">
-							
-						</script>
+					<!-- 	<script type="text/javascript">
+							function appendUsers(strings, rows) {
+							    return function(d) {
+							        let temp = strings.slice();
+							        rows.forEach((row, i) => {
+							            temp[i] = temp[i] + data[row];
+							        });
+							        return temp.join('');
+							    }
+							};
+
+						</script> -->
+
+ 						<strong>NRP :</strong> ${ d.rows.id }<br>  
+						<strong>Nama:</strong> ${ d.rows.username }<br>  
+						<strong>Role:</strong> ${ d.rows.role }  
 
 				 	</p>
 
