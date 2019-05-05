@@ -7,17 +7,16 @@ var connection = mysql.createConnection(dbconfig.connection);
 
 connection.query('USE ' + dbconfig.database);
 
-module.exports = function(passport) 
+module.exports = function(passport) {
 
-{
-
+    // console.log("hello masuk passpord");
     passport.serializeUser(function(user, done) {
         done(null, user.id);
     });
 
 
     passport.deserializeUser(function(id, done) {
-        connection.query("SELECT * FROM users WHERE id = ? ",[id], function(err, rows){
+        connection.query("SELECT * FROM users WHERE ID = ? ",[id], function(err, rows){
             done(err, rows[0]);
         });
     });
@@ -32,11 +31,13 @@ module.exports = function(passport)
             passReqToCallback : true 
         },
         function(req,id,username, done) {
+                // console.log("hello masuk signup");
             var id = req.body.id;
             var username = req.body.username;
             var password = req.body.password;
             var role = req.body.role;
-            connection.query("SELECT * FROM users WHERE id = ?",[id], function(err, rows) {
+            connection.query("SELECT * FROM users WHERE ID = ?",[id], function(err, rows) {
+                // console.log("masuk query");
                 if (err)
                     return done(err);
                 if (rows.length) {
@@ -49,7 +50,7 @@ module.exports = function(passport)
                         role:role
                     };
 
-                    var insertQuery = "INSERT INTO users ( id, username, password, role ) values (?,?,?,?)";
+                    var insertQuery = "INSERT INTO users ( ID, USERNAME, PASSWORD, GR_ID ) values (?,?,?,?)";
 
                     connection.query(insertQuery,[newUserMysql.id, newUserMysql.username, newUserMysql.password, newUserMysql.role],function(err, rows) {
 
@@ -69,11 +70,12 @@ module.exports = function(passport)
             passReqToCallback : true 
         },
         function(req, id, password, done) { 
-            var insertQuery = "INSERT INTO log ( id, L_DATE, L_STATUS ) values (?,?,?)";
+            var insertQuery = "INSERT INTO log ( L_ID, ID ,G_ID , L_TIME ,L_STATUS ) values (?,?,?,?,?)";
+            var insertQuery2 = "SELECT * FROM users , memiliki , gerbang WHERE users.id = ? and users.id = memiliki.id and gerbang.K_ID = memiliki.K_ID and gerbang.K_JAMAWAL <= CAST(? as time) and gerbang.K_JAMAKHIR >= CAST(? as time)"
 
             var today = new Date();
             var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-             connection.query("SELECT * FROM users , memiliki , gerbang WHERE users.id = ? and users.id = memiliki.id and gerbang.K_ID = memiliki.K_ID and gerbang.K_JAMAWAL <= CAST(? as time) and gerbang.K_JAMAKHIR >= CAST(? as time)",[id , time , time],function(err, rows){
+             connection.query(insertQuery2 ,[id , time , time],function(err, rows){
                     var newUserLogin = {
                     id:id,
                     L_DATE: time,
@@ -109,7 +111,6 @@ module.exports = function(passport)
                 });
 
                 return done(null, rows[0]);  
-
 
             });
         })

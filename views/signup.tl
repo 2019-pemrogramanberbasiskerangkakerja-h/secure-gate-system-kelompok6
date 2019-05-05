@@ -23,7 +23,7 @@
 	${ d.message.length > 0? '<div class="alert alert-danger">' + d.message + '</div>': ''}
 
 	<!-- LOGIN FORM -->
-	<form action="/signup" method="post">
+	<form action="/users" method="post">
 		<div class="form-group">
 			<label>Nomor Identitas</label>
 			<input type="text" class="form-control" name="id">
@@ -39,9 +39,15 @@
         <div class="form-group">
             <label class="m-2">Role</label>
             <select id="status" class="form-control" name="role" required>
+            	 
+				
 				<option value="" disabled selected>Silahkan memilih role</option>
-                <option value="Dosen">Dosen</option>
-                <option value="Mahasiswa">Mahasiswa</option>
+
+		${d.rows.reduce((str,row)=> str + '<option value= "'+ row.GR_ID +'">'+ row.GR_ROLE +'</option>', '')}
+  <!--               
+                <option value="1">Dosen</option>
+                <option value="2">Mahasiswa</option> -->
+
             </select>
         </div>
 		<button type="submit" class="btn btn-warning btn-lg">Sign up</button>
@@ -49,7 +55,7 @@
 
 	<hr>
 
-	<p>Already have an account? <a href="/login">Login</a></p>
+	<p>Already have an account? <a href="/">Login</a></p>
 	<p>Or go <a href="/">home</a>.</p>
 
 </div>
