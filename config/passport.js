@@ -71,7 +71,7 @@ module.exports = function(passport) {
         },
         function(req, id, password, done) { 
             var insertQuery = "INSERT INTO log ( L_ID, ID ,G_ID , L_TIME ,L_STATUS ) values (?,?,?,?,?)";
-            var insertQuery2 = "SELECT * FROM users , memiliki , gerbang WHERE users.id = ? and users.id = memiliki.id and gerbang.K_ID = memiliki.K_ID and gerbang.K_JAMAWAL <= CAST(? as time) and gerbang.K_JAMAKHIR >= CAST(? as time)"
+            var insertQuery2 = "SELECT * FROM users , hak_akses , gate WHERE users.id = ? and users.id = hak_akses.id and gate.K_ID = hak_akses.K_ID and gate.K_JAMAWAL <= CAST(? as time) and gate.K_JAMAKHIR >= CAST(? as time)"
 
             var today = new Date();
             var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();

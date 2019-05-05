@@ -49,3 +49,58 @@ exports.getLogin= (req,res)=>{
             }
         res.redirect('/');
 };
+
+exports.addGates= (req, res) => {
+//    let message = '';
+    let G_GATENAME = req.body.G_GATENAME;
+    let G_OPEN = req.body.G_OPEN;
+    let G_CLOSE = req.body.G_CLOSE;
+    let G_ROLE = req.body.G_ROLE;
+
+    let addQuery = "SELECT * FROM `gate` WHERE G_GATENAME = '" + G_GATENAME + "'";
+
+    connection.query(addQuery, (err, result) => {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        // if (result.length > 0) {
+        //     message = 'Gate name already exists';
+        //     res.render('gates.tl', {
+        //         message,
+        //         title: Welcome to GERBANG IF | Add a new gates
+        //     });
+        // } 
+        else {
+            let query = "INSERT INTO `gate` (G_GATENAME, G_OPEN, G_CLOSE, G_ROLE) VALUES ('" +
+                G_GATENAME + "', '" + G_OPEN + "', '" + G_CLOSE + "', '" + G_ROLE + "')";
+            connection.query(query, (err, result) => {
+                if (err) {
+                    return res.status(500).send(err);
+                }
+                res.redirect('/');
+            });
+        }
+    });
+};
+
+exports.getGates= (req,res)=>{
+        var row = [];
+        var row2 = [];
+
+        connection.query('select * from grup', function (err, rows) {
+            if (err) {
+                console.log(err);
+            } else {
+                if (rows.length) {
+                    for (var i = 0, len = rows.length; i < len; i++) {  //query den gelen bütün parametreleri rows sınıfına ekliyoruz .
+                        row[i] = rows[i];
+                        // console.log(row[i]);                        
+                    }  
+                }
+            }
+             res.render('gates',{
+                message: req.flash('message'),
+                rows: row
+             });
+        });
+};

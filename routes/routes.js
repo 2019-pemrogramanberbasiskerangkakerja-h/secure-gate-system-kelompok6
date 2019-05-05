@@ -25,10 +25,19 @@ module.exports = function(app,passport) {
 
 // auth-login
 	app.post('/login', passport.authenticate('local-login') ,  controller.getLogin);
-
 // Gate
-	// app.post('/gates', controller.postGates);
-	// app.get('/gates', controller.getGates);
+	app.post('/gates', controller.addGates);
+
+	// app.post('/gates',(req, res) => {
+	//   let data = {G_GATENAME: req.body.G_GATENAME, G_OPEN: req.body.G_OPEN, G_CLOSE: req.body.G_CLOSE};
+	//   let sql = "INSERT INTO gate SET ?";
+	//   let query = conn.query(sql, data,(err, results) => {
+	//     if(err) throw err;
+	//     res.redirect('/login');
+	//   });
+	// });
+
+	app.get('/gates', controller.getGates);
 	// app.get('/gates/:g_id', controller.users);
 	// app.delete('/gates/:g_id', controller.users);
 
