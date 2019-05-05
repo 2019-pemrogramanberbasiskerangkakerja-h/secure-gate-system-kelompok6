@@ -27,6 +27,7 @@
     "ejs": "*",
     "express": "*",
     "express-session": "*",
+    "express-tl": "^1.0.2",
     "json-socket": "*",
     "morgan": "*",
     "mysql": "*",
