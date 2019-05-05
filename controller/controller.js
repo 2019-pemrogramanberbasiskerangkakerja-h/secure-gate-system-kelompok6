@@ -28,17 +28,6 @@ exports.getUsers= (req,res)=>{
                     }  
                 }
             }
-            // row2 = Object.values(JSON.parse(JSON.stringify(row)));
-	       // var ids = row2.map(x => x.GR_ID);
-			// console.log(ids)
-	       // console.log(row2.GR_ID);            
-	       // console.log(row[0]);
-
-    		// rowid = row.map(v => v.GR_ID);
-    		// console.log(rowid);
-    		// rowrole = row.map(v => v.GR_ROLE);
-    		// console.log(rowrole);	       
-
 	         res.render('signup',{
 	         	message: req.flash('message'),
 	         	rows: row
@@ -60,24 +49,3 @@ exports.getLogin= (req,res)=>{
             }
         res.redirect('/');
 };
-
-// module.exports = function(app,passport) {
-		
-// 		exports.index= (req,res)=>{
-// 		    // if(req.session.nrp=== undefined || req.session.nrp==='0'){
-// 		    //   return res.render('login');
-// 		    // }
-// 		    // else{
-// 		    //   return res.redirect('/dashboard');
-// 		    // }
-// 		        res.render('login.tl',{ message: req.flash('loginMessage') });
-// 		};
-
-// 		// exports.getUsers= (req,res)=>{
-// 		//          res.render('signup.tl',{message: req.flash('message')});
-// 		// };
-
-// 		// exports.postUsers= (req,res)=>{
-// 		// };
-
-// };

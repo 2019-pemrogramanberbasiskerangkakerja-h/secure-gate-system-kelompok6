@@ -26,13 +26,11 @@ module.exports = function(app,passport) {
 // auth-login
 	app.post('/login', passport.authenticate('local-login') ,  controller.getLogin);
 
-
 // Gate
 	// app.post('/gates', controller.postGates);
 	// app.get('/gates', controller.getGates);
 	// app.get('/gates/:g_id', controller.users);
 	// app.delete('/gates/:g_id', controller.users);
-
 
 	return route;
 
