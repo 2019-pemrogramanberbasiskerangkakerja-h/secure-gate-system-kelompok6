@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-	<title>Node Authentication</title>
+	<title>GERBANG</title>
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
 	<style>
@@ -12,7 +12,7 @@
 <div class="container">
 
 	<div class="page-header text-center">
-		<h1><span class="fa fa-anchor"></span> Profile Page</h1>
+		<h1><span class="fa fa-anchor"></span>Profile Page</h1>
 		<a href="/logout" class="btn btn-default btn-sm">Logout</a>
 	</div>
 
@@ -22,32 +22,25 @@
 		<div class="col-sm-3"></div>
 		<div class="col-sm-6">
 			<div class="well">
-				<h3><span class="fa fa-user"></span> Local</h3>
+				<h3><span class="fa fa-user"></span>Berhasil Masuk Pintu Utama</h3>
 					<p>
-						<!-- <% rows.forEach(function(rows) { %>
-							<strong>NRP</strong>: <%=rows.id%><br>  
-							<strong>Nama</strong> : <%=rows.username%><br>  
-							<strong>Role</strong> : <%=rows.role%>  
-					 	<% }); %> -->
 
-					 	
+					 	<!-- <table> -->
+						  <thead>
+						    <tr>
+						      <th class='prop__name' data-prop-name='id'>NRP ${d.nrp}</th>
+						      <br>
+						      <th class='prop__name' data-prop-name='username'>Nama ${d.nama} </th>
+						      <br>
+						      <th class='prop__name' data-prop-name='role'>Role ${d.role}</th>
+						      <br>
+						    </tr>
+						  </thead>
+						<!-- </table> -->
 
-					<!-- 	<script type="text/javascript">
-							function appendUsers(strings, rows) {
-							    return function(d) {
-							        let temp = strings.slice();
-							        rows.forEach((row, i) => {
-							            temp[i] = temp[i] + data[row];
-							        });
-							        return temp.join('');
-							    }
-							};
-
-						</script> -->
-
- 						<strong>NRP :</strong> ${ d.rows.id }<br>  
-						<strong>Nama:</strong> ${ d.rows.username }<br>  
-						<strong>Role:</strong> ${ d.rows.role }  
+						<script type="text/javascript">
+							
+						</script>
 
 				 	</p>
 
