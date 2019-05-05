@@ -55,7 +55,8 @@ exports.addGates= (req, res) => {
     let G_GATENAME = req.body.G_GATENAME;
     let G_OPEN = req.body.G_OPEN;
     let G_CLOSE = req.body.G_CLOSE;
-    let G_ROLE = req.body.G_ROLE;
+    let G_ROLE = req.body.role;
+    console.log(G_ROLE);
 
     let addQuery = "SELECT * FROM `gate` WHERE G_GATENAME = '" + G_GATENAME + "'";
 
