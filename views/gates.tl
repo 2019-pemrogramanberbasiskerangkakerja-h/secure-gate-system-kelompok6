@@ -34,6 +34,18 @@
             </form>
 
             <hr>
+            <table style="width:100%">
+                  <tr>
+                    <th>Name of Gate</th>
+                    <th>Time Open Gate</th>
+                    <th>Time Close Gate</th>
+                    <th>Action</th> 
+                  </tr>
+
+                ${d.rows.reduce((str,row)=> str + '  <tr> ' + '<td>' +row.G_GATENAME +'</td>' + '<td>' +row.G_OPEN +'</td>' + '<td>' +row.G_CLOSE +'</td>' + '<td> <a href="/gates/'+ row.G_ID +'">info</a> </td>' +' </tr>', '')}          
+                
+            </table>
+
         </div>
     </div>
 </body>
