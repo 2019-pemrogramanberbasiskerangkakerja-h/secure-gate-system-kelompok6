@@ -15,7 +15,7 @@ exports.index= (req,res)=>{
 };
 
 exports.getUsers= (req,res)=>{
-		var row = [];
+        var row = [];
         var row2 = [];
 
         connection.query('select * from grup', function (err, rows) {
@@ -29,10 +29,10 @@ exports.getUsers= (req,res)=>{
                     }  
                 }
             }
-	         res.render('signup',{
-	         	message: req.flash('message'),
-	         	rows: row
-	         });
+             res.render('signup',{
+                message: req.flash('message'),
+                rows: row
+             });
         });
 };
 

@@ -55,7 +55,7 @@
 
 	<hr>
 
-	<p>Already have an account? <a href="/Login">Login</a></p>
+	<p>Already have an account? <a href="/login">Login</a></p>
 	<p>Or go <a href="/">home</a>.</p>
 
 </div>

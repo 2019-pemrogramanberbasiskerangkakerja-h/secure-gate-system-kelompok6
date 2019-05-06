@@ -28,6 +28,7 @@
 		+ '<strong>'+ 'Username : ' + row.USERNAME +'</strong> <br>'
 		+ '<strong>'+ 'Role : ' + row.GR_ROLE +'</strong> <br>'
 	, '')}						 
+
 				 	</p>
 
 			</div>
