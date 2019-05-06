@@ -120,9 +120,27 @@ exports.addGates= (req, res) => {
 };
 
 exports.getGates= (req,res)=>{
-        res.render('gates',{
-            message: req.flash('message')
-         });
+        // console.log(req.user.id)
+        
+        // if (req.session.id == undefined || req.session.id == 0){
+            var row = [];
+            var row2 = [];
+            connection.query('select * from gate', function (err, rows) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    if (rows.length) {
+                        for (var i = 0, len = rows.length; i < len; i++) {  //query den gelen bütün parametreleri rows sınıfına ekliyoruz .
+                            row[i] = rows[i];
+                            // console.log(row[i]);                        
+                        }  
+                    }
+                }
+                 res.render('gates',{
+                    message: req.flash('message'),
+                    rows: row
+                 });
+            });
 };
 
 exports.getIdUser= (req,res)=>{
@@ -160,10 +178,19 @@ exports.getIdUser= (req,res)=>{
 
 };
 
+// exports.getIdGates=(req,res)=>{
+//     var id = req.params.id;
+//     console.log(id);
+// }
+
     exports.getLogout= (req,res)=>{
             req.logout();
             res.redirect('/');
     };
+    // app.get('/logout', function(req, res) {
+    //     req.logout();
+    //     res.redirect('/');
+    // });
 
     exports.getDelUser = (req,res)=>{
 
