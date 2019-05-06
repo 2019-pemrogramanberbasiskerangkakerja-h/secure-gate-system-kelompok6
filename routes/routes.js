@@ -6,7 +6,9 @@ var dbconfig = require('../config/database');
 var mysql = require('mysql');
 var connection = mysql.createConnection(dbconfig.connection); 
 var bcrypt = require('bcrypt-nodejs');
+var app = express();
 
+app.use(express.static("public"));
 
 module.exports = function(app,passport) {
 		
@@ -24,6 +26,7 @@ module.exports = function(app,passport) {
 	
 	//Get info user
 	app.get('/users/:id', controller.getIdUser);
+
 	// Delete user
 	// app.delete('/users/:id', controller.users);
 

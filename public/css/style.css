@@ -4,6 +4,7 @@ body
     background-size: cover;
     padding: 0;
     margin: 0;
+    padding-top:80px;
 }
 
 p , h1{

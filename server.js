@@ -14,7 +14,7 @@ var flash    = require('connect-flash');
 const tl = require('express-tl');
 
 require('./config/passport.js')(passport); 
-
+app.use(express.static(__dirname + '/public'));
 app.use(morgan('dev')); 
 app.use(cookieParser()); 
 app.use(bodyParser.urlencoded({

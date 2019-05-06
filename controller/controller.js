@@ -8,10 +8,9 @@ var bcrypt = require('bcrypt-nodejs');
 
 // app.use('/', router);
 
-
 exports.index= (req,res)=>{
-        // res.render('login.tl',{ message: req.flash('loginMessage') });
-        res.redirect('/users');
+        res.render('welcome.tl',{ message: req.flash('loginMessage') });
+        //res.redirect('/users');
 };
 
 exports.getUsers= (req,res)=>{
@@ -132,7 +131,8 @@ exports.getIdUser= (req,res)=>{
             res.render('index', {
                     rows: row
                 });
-            // res.render('index.tl', {rows : row});  
+            // res.render('index.tl', {rows : row});
+            req.send(req.params);  
 
         });
 };
