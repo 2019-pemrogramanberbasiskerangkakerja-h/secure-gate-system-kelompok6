@@ -14,25 +14,30 @@ exports.index= (req,res)=>{
 };
 
 exports.getUsers= (req,res)=>{
-        var row = [];
-        var row2 = [];
-
-        connection.query('select * from grup', function (err, rows) {
-            if (err) {
-                console.log(err);
-            } else {
-                if (rows.length) {
-                    for (var i = 0, len = rows.length; i < len; i++) {  //query den gelen bütün parametreleri rows sınıfına ekliyoruz .
-                        row[i] = rows[i];
-                        // console.log(row[i]);                        
-                    }  
+        // console.log(req.user.id)
+        
+        // if (req.user.ID === undefined || req.user.ID === 0){
+            var row = [];
+            var row2 = [];
+            connection.query('select * from grup', function (err, rows) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    if (rows.length) {
+                        for (var i = 0, len = rows.length; i < len; i++) {  //query den gelen bütün parametreleri rows sınıfına ekliyoruz .
+                            row[i] = rows[i];
+                            // console.log(row[i]);                        
+                        }  
+                    }
                 }
-            }
-             res.render('signup',{
-                message: req.flash('message'),
-                rows: row
-             });
-        });
+                 res.render('signup',{
+                    message: req.flash('signupMessage'),
+                    rows: row
+                 });
+            });
+
+        // }
+
 };
 
 exports.postUsers= (req,res)=>{
@@ -66,7 +71,7 @@ exports.getLogin= (req,res)=>{
                 }
             }
              res.render('login',{
-                message: req.flash('message'),
+                message: req.flash('loginMessage'),
                 rows: row
              });
         });
@@ -111,7 +116,7 @@ exports.getIdUser= (req,res)=>{
       // console.log(req.params.id);
       // res.status(200).send(req.params.id);
       // const id = parseInt(req.params.id, 10);
-      // console.log(id);
+      console.log(id);
        var row = [];
         var row2=[];
           console.log("TES");

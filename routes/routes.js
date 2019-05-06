@@ -12,7 +12,7 @@ app.use(express.static("public"));
 
 module.exports = function(app,passport) {
 		
-	app.get('/', controller.index);
+	app.get('/' ,controller.index);
 // user
 	//add user
 	app.post('/users', passport.authenticate('local-signup', {
@@ -26,17 +26,15 @@ module.exports = function(app,passport) {
 	
 	//Get info user
 	app.get('/users/:id', controller.getIdUser);
-
 	// Delete user
 	// app.delete('/users/:id', controller.users);
 
 // auth-login
 	app.post('/login', passport.authenticate('local-login', {
             successRedirect: '/users/:id',
-            failureRedirect: '/login',
-            failureFlash : true 
+             failureRedirect: '/login',
+             failureFlash : true 
 	}));
-	
 	app.get('/login', controller.getLogin);	
 // Gate
 	app.post('/gates', controller.addGates);
@@ -47,10 +45,10 @@ module.exports = function(app,passport) {
 
 };
 
-// function isLoggedIn(req,res,next){
-// 	if(req.isAuthenticated()){
-// 		return next();
-//     }else{
-//         res.redirect('/login');
-//     }
-// }
+function isLoggedIn(req,res,next){
+	if(req.isAuthenticated()){
+		return next();
+    }else{
+        res.redirect('/login');
+    }
+}

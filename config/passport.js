@@ -12,7 +12,7 @@ module.exports = function(passport) {
     // console.log("hello masuk passpord");
     passport.serializeUser(function(user, done) {
         // console.log(user.id);
-        // console.log(user.ID);
+        console.log(user.ID);
         done(null, user.ID);
     });
 
@@ -94,15 +94,17 @@ module.exports = function(passport) {
                 console.log(rows);
             
                 if (err){
+
                     connection.query(insertQuery,[newUserLogin.id, newUserLogin.gate , newUserLogin.L_DATE, newUserLogin.L_STATUS],function(err, rows) {
                     });
+                    
                     return done(err);
                 }
 
                 if (!rows.length) {
                     connection.query(insertQuery,[newUserLogin.id, newUserLogin.gate , newUserLogin.L_DATE, newUserLogin.L_STATUS],function(err, rows) {
                     });
-                    
+
                     return done(null, false, req.flash('loginMessage', 'gagal login.'));    
                 }
 
@@ -120,7 +122,10 @@ module.exports = function(passport) {
                     L_STATUS: 1
                 }; 
 
+                console.log("kenapa");
+
                 connection.query(insertQuery,[newUserLogin.id, newUserLogin.gate , newUserLogin.L_DATE, newUserLogin.L_STATUS],function(err, rows) {
+                    console.log("berhasil");
                 });
 
                 return done(null, rows[0]);  
