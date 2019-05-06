@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>GERBANG</title>
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+    <title>GERBANG</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
 
-	<style>
-		body 		{ padding-top:80px; }
-	</style>
+    <style>
+        body        { padding-top:80px; }
+    </style>
 </head>
 <body>
     <div class="container" >
@@ -30,8 +30,10 @@
                     <label class="m-2">GERBANG</label>
                     <select id="status" class="form-control" name="role" required>
                         <option value="" disabled selected>Silahkan memilih GERBANG</option>
-                        <option value="1">Pintu PL1</option>
-                        <option value="2">Pintu PL2</option>
+                        ${d.rows.reduce((str,row)=> str + '<option value= "'+ row.G_ID +'">'+ row.G_GATENAME +'</option>', '')}
+
+ <!--                        <option value="1">Pintu PL1</option>
+                        <option value="2">Pintu PL2</option> -->
                     </select>
                 </div>
                 

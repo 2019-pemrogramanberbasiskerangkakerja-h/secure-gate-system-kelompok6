@@ -28,9 +28,9 @@
 					 	<!-- <table> -->
 						  <thead>
 						    <tr>
-						      <th class='prop__name' data-prop-name='id'>NRP ${d.nrp}</th>
+						      <th class='prop__name' data-prop-name='id'>NRP ${d.id}</th>
 						      <br>
-						      <th class='prop__name' data-prop-name='username'>Nama ${d.nama} </th>
+						      <th class='prop__name' data-prop-name='username'>Nama ${d.username} </th>
 						      <br>
 						      <th class='prop__name' data-prop-name='role'>Role ${d.role}</th>
 						      <br>

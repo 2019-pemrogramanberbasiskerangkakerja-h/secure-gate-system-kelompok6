@@ -37,7 +37,7 @@
                     <label for="G_CLOSE" class="m-2">Time Close Gate :</label>
                     <input type="time" id="G_CLOSE" name="G_CLOSE" min="1:00" max="24:00" required>
                 </div>               
-                <button type="submit" class="btn btn-warning btn-lg">Login</button>
+                <button type="submit" class="btn btn-warning btn-lg">Add</button>
             </form>
 
             <hr>
