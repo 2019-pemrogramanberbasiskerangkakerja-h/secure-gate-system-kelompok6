@@ -13,7 +13,6 @@
 
 	<div class="page-header text-center">
 		<h1><span class="fa fa-anchor"></span>Profile Page</h1>
-		${d.rows.reduce((str,row)=>str+'<a href="/users/'+ row.ID +'" class="btn btn-default btn-sm" method= "DELETE"> delete</a>', '')}
 		<!-- <a href="/users/:id" class="btn btn-default btn-sm">delete user</a> -->
 	</div>
 
@@ -32,6 +31,8 @@
 				 	</p>
 
 			</div>
+			<!-- href="/users/'+ row.ID +'" -->
+		<!-- 	${d.rows.reduce((str,row)=>str+ '<form action="/users/'+ row.ID +'?_method=DELETE" method="POST"><button type="submit"> delete</button></form>' , '')} -->
 		</div>
 
 	</div>

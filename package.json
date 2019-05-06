@@ -29,6 +29,7 @@
     "express-session": "*",
     "express-tl": "^1.0.2",
     "json-socket": "*",
+    "method-override": "^3.0.0",
     "morgan": "*",
     "mysql": "*",
     "nodemon": "^1.18.11",
