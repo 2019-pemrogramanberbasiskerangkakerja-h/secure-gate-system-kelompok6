@@ -13,9 +13,15 @@ module.exports = function(app,passport) {
 	app.get('/', controller.index);
 // user
 	//add user
-	app.post('/users', passport.authenticate('local-signup') , controller.postUsers  );
+	app.post('/users', passport.authenticate('local-signup', {
+            session : false,
+            successRedirect: '/login',
+            failureRedirect: '/users',
+            failureFlash : true 
+    }));
 	// get user
 	app.get('/users', controller.getUsers);
+	
 	//Get info user
 	// app.get('/users/:id', controller.users);
 	// Delete user
@@ -23,10 +29,10 @@ module.exports = function(app,passport) {
 
 // auth-login
 	app.post('/login', passport.authenticate('local-login', {
-		    SuccessRedirect : '/gates', 
-            failureRedirect : '/login',
-            failureFlash : true
-	}) ,  controller.postLogin);
+            successRedirect: '/users',
+            failureRedirect: '/login',
+            failureFlash : true 
+	}));
 	
 	app.get('/login', controller.getLogin);	
 // Gate
@@ -34,7 +40,6 @@ module.exports = function(app,passport) {
 	app.get('/gates', controller.getGates);
 	// app.get('/gates/:g_id', controller.users);
 	// app.delete('/gates/:g_id', controller.users);
-
 	return route;
 
 };

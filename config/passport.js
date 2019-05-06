@@ -10,28 +10,18 @@ connection.query('USE ' + dbconfig.database);
 module.exports = function(passport) {
 
     // console.log("hello masuk passpord");
-    //  passport.serializeUser(function(user, done) {
-    //   done(null, user.id);
-    // });
+    passport.serializeUser(function(user, done) {
+        // console.log(user.id);
+        console.log(user.ID);
+        done(null, user.ID);
+    });
 
 
-    // passport.deserializeUser(function(id, done) {
-    //     connection.query("SELECT * FROM users WHERE ID = ? ",[id], function(err, rows){          
-    //         done(err, rows[0]);
-    //     });
-    // });
-
-var user_cache = {};
-
-passport.serializeUser(function(users, next) {
-  let id = users._id;
-  user_cache[id] = users;
-  next(null, id);
-});
-
-passport.deserializeUser(function(id, next) {
-  next(null, user_cache[id]);
-});
+    passport.deserializeUser(function(id, done) {
+        connection.query("SELECT * FROM users WHERE ID = ? ",[id], function(err, rows){          
+            done(err, rows[0]);
+        });
+    });
 
     passport.use(
         'local-signup',

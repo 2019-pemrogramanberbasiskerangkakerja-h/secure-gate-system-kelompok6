@@ -37,12 +37,12 @@ exports.getUsers= (req,res)=>{
 };
 
 exports.postUsers= (req,res)=>{
-     console.log("Berhasil mendaftar user");    
-        res.redirect('/');   
+	 console.log("Berhasil mendaftar user");	
+        // res.redirect('/');	 
 };
 
 exports.postLogin= (req,res)=>{
-     console.log("hello");
+	 console.log("hello");
             if (req.body.remember) {
               req.session.cookie.maxAge = 1000 * 60 * 3;
             } else {
