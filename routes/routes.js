@@ -28,18 +28,27 @@ module.exports = function(app,passport) {
 	app.get('/users/:id', controller.getIdUser);
 	// Delete user
 	// app.delete('/users/:id', controller.users);
-
 // auth-login
-	app.post('/login', passport.authenticate('local-login', {
-            successRedirect: '/users/:id',
-             failureRedirect: '/login',
-             failureFlash : true 
-	}));
+
+	// app.post('/login', passport.authenticate('local-login', {
+ //            successRedirect: '/users/:id',
+ //            failureRedirect: '/login',
+ //            failureFlash : true 
+	// }));
+	app.post('/login', function(req, res, next){
+		var id =  req.body.id;
+		passport.authenticate('local-login', {
+            successRedirect: '/users/'+id,
+            failureRedirect: '/login',
+            failureFlash : true 
+		})(req, res, next);
+	});
+	
 	app.get('/login', controller.getLogin);	
 // Gate
 	app.post('/gates', controller.addGates);
 	app.get('/gates', controller.getGates);
-	// app.get('/gates/:g_id', controller.users);
+	// app.get('/gates/:g_id', controller.users);n
 	// app.delete('/gates/:g_id', controller.users);
 	return route;
 
