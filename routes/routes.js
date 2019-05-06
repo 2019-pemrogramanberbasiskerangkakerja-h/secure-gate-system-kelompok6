@@ -17,7 +17,7 @@ module.exports = function(app,passport) {
 	//add user
 	app.post('/users', passport.authenticate('local-signup', {
             session : false,
-            successRedirect: '/login',
+            successRedirect: '/',
             failureRedirect: '/users',
             failureFlash : true 
     }));

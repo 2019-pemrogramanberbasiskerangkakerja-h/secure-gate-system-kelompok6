@@ -81,7 +81,7 @@ module.exports = function(passport) {
             var password = req.body.password;     
             var today = new Date();
             var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-            
+
              // log
                var newUserLogin = {
                     id:id,
@@ -102,8 +102,8 @@ module.exports = function(passport) {
                 if (!rows.length) {
                     connection.query(insertQuery,[newUserLogin.id, newUserLogin.gate , newUserLogin.L_DATE, newUserLogin.L_STATUS],function(err, rows) {
                     });
-                    return done(null, false, req.flash('loginMessage', 'gagal login.'));
-                
+                    
+                    return done(null, false, req.flash('loginMessage', 'gagal login.'));    
                 }
 
                 

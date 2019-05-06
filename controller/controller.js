@@ -110,8 +110,8 @@ exports.getIdUser= (req,res)=>{
       // req.params.id = req.user.ID;
       // console.log(req.params.id);
       // res.status(200).send(req.params.id);
-      const id = parseInt(req.params.id, 10);
-      console.log(id);
+      // const id = parseInt(req.params.id, 10);
+      // console.log(id);
        var row = [];
         var row2=[];
           console.log("TES");
@@ -131,8 +131,9 @@ exports.getIdUser= (req,res)=>{
             res.render('index', {
                     rows: row
                 });
+            // res.json(req.user.ID); 
             // res.render('index.tl', {rows : row});
-            req.send(req.params);  
+            // req.send(req.params); 
 
         });
 };
