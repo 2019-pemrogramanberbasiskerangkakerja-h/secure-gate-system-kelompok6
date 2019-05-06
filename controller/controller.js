@@ -10,7 +10,8 @@ var bcrypt = require('bcrypt-nodejs');
 
 
 exports.index= (req,res)=>{
-        res.render('login.tl',{ message: req.flash('loginMessage') });
+        // res.render('login.tl',{ message: req.flash('loginMessage') });
+        res.redirect('/users');
 };
 
 exports.getUsers= (req,res)=>{
@@ -37,10 +38,10 @@ exports.getUsers= (req,res)=>{
 
 exports.postUsers= (req,res)=>{
 	 console.log("Berhasil mendaftar user");	
-        res.redirect('/');	 
+        // res.redirect('/');	 
 };
 
-exports.getLogin= (req,res)=>{
+exports.postLogin= (req,res)=>{
 	 console.log("hello");
             if (req.body.remember) {
               req.session.cookie.maxAge = 1000 * 60 * 3;
@@ -50,13 +51,36 @@ exports.getLogin= (req,res)=>{
         res.redirect('/');
 };
 
+exports.getLogin= (req,res)=>{
+        var row = [];
+        var row2 = [];
+
+        connection.query('select * from gate', function (err, rows) {
+            if (err) {
+                console.log(err);
+            } else {
+                if (rows.length) {
+                    for (var i = 0, len = rows.length; i < len; i++) {  //query den gelen bütün parametreleri rows sınıfına ekliyoruz .
+                        row[i] = rows[i];
+                        // console.log(row[i]);                        
+                    }  
+                }
+            }
+             res.render('login',{
+                message: req.flash('message'),
+                rows: row
+             });
+        });
+
+};
+
 exports.addGates= (req, res) => {
 //    let message = '';
     let G_GATENAME = req.body.G_GATENAME;
     let G_OPEN = req.body.G_OPEN;
     let G_CLOSE = req.body.G_CLOSE;
     let G_ROLE = req.body.role;
-    console.log(G_ROLE);
+    // console.log(G_ROLE);
 
     let addQuery = "SELECT * FROM `gate` WHERE G_GATENAME = '" + G_GATENAME + "'";
 

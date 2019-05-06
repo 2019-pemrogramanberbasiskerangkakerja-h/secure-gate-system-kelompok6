@@ -30,8 +30,12 @@
                     <label class="m-2">GERBANG</label>
                     <select id="status" class="form-control" name="role" required>
                         <option value="" disabled selected>Silahkan memilih GERBANG</option>
-                        <option value="1">Pintu PL1</option>
-                        <option value="2">Pintu PL2</option>
+
+
+        ${d.rows.reduce((str,row)=> str + '<option value= "'+ row.G_ID +'">'+ row.G_GATENAME +'</option>', '')}
+
+ <!--                        <option value="1">Pintu PL1</option>
+                        <option value="2">Pintu PL2</option> -->
                     </select>
                 </div>
                 

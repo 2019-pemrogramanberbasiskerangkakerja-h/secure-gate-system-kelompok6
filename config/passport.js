@@ -11,12 +11,14 @@ module.exports = function(passport) {
 
     // console.log("hello masuk passpord");
     passport.serializeUser(function(user, done) {
-        done(null, user.id);
+        // console.log(user.id);
+        console.log(user.ID);
+        done(null, user.ID);
     });
 
 
     passport.deserializeUser(function(id, done) {
-        connection.query("SELECT * FROM users WHERE ID = ? ",[id], function(err, rows){
+        connection.query("SELECT * FROM users WHERE ID = ? ",[id], function(err, rows){          
             done(err, rows[0]);
         });
     });
@@ -67,49 +69,41 @@ module.exports = function(passport) {
         new LocalStrategy({
             usernameField : 'id',
             passwordField : 'password',
+            roleField : 'role',
             passReqToCallback : true 
         },
-        function(req, id, password, done) { 
-            var insertQuery = "INSERT INTO log ( L_ID, ID ,G_ID , L_TIME ,L_STATUS ) values (?,?,?,?,?)";
-            var insertQuery2 = "SELECT * FROM users , hak_akses , gate WHERE users.id = ? and users.id = hak_akses.id and gate.K_ID = hak_akses.K_ID and gate.K_JAMAWAL <= CAST(? as time) and gate.K_JAMAKHIR >= CAST(? as time)"
-
+       function(req, id, password, done) { 
+            var insertQuery = "INSERT INTO log ( id, L_DATE, L_STATUS ) values (?,?,?)";
+            // var insertQuery2 = "SELECT * FROM users u , hak_akses ha , gate ga , grup g WHERE u.ID = ? and g.GR_ID = u.GR_ID and ha.GR_ID = g.GR_ID and ga.G_ID = ? and ga.G_ID = ha.G_ID and ga.G_OPEN <= CAST(? as time) and ga.G_CLOSE > CAST(? as time)";
+            var insertQuery2 = "SELECT * FROM users WHERE ID = ?"
+            var id = req.body.id;
+            var gate = req.body.role;  
+            var password = req.body.password;     
             var today = new Date();
             var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-             connection.query(insertQuery2 ,[id , time , time],function(err, rows){
-                    var newUserLogin = {
-                    id:id,
-                    L_DATE: time,
-                    L_STATUS: 0
-                };
-
+             
+             connection.query(insertQuery2,[id],function(err, rows){
+                console.log(rows);
+            
                 if (err){
-                    connection.query(insertQuery,[newUserLogin.id, newUserLogin.L_DATE, newUserLogin.L_STATUS],function(err, rows) {
-                    });
-
+                    console.log("tes");
                     return done(err);
                 }
+
                 if (!rows.length) {
-                    connection.query(insertQuery,[newUserLogin.id, newUserLogin.L_DATE, newUserLogin.L_STATUS],function(err, rows) {
-                    });
+                     console.log("tes2");
                     return done(null, false, req.flash('loginMessage', 'gagal login.'));
- 
-                }
-                if (!bcrypt.compareSync(password, rows[0].password)){
                 
-                     connection.query(insertQuery,[newUserLogin.id, newUserLogin.L_DATE, newUserLogin.L_STATUS],function(err, rows) {
-                    });
+                }
+                console.log(password);
+                console.log(rows[0].PASSWORD);
+
+                if (!bcrypt.compareSync(password, rows[0].PASSWORD)){
+                
                     return done(null, false, req.flash('loginMessage', 'password salah'));
                 }
 
-                var newUserLogin = {
-                    id:id,
-                    L_DATE: time,
-                    L_STATUS: 1
-                };    
-                
-                connection.query(insertQuery,[newUserLogin.id, newUserLogin.L_DATE, newUserLogin.L_STATUS],function(err, rows) {
-                });
-
+                console.log("tanpa err");
                 return done(null, rows[0]);  
 
             });
