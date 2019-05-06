@@ -72,7 +72,7 @@
 		    <th>keterangan</th> 
 		  </tr>
 
-		${d.rows2.reduce((str,row)=> str + '  <tr> ' + '<td>' +row.ID +'</td>' + '<td>' +row.USERNAME +'</td>' + '<td> <a href="/users/'+ row.ID +'">info</a> </td>' +' </tr>', '')}		  
+		${d.rows2.reduce((str,row2)=> str + '  <tr> ' + '<td>' +row2.ID +'</td>' + '<td>' +row2.USERNAME +'</td>' + '<td> <a href="/users/'+ row2.ID +'">info</a> </td>' +' </tr>', '')}		  
 		
 		</table>
 	</div>

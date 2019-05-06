@@ -41,13 +41,15 @@ exports.getUsers= (req,res)=>{
                             }  
                         }
                     }
-                });
-
+                
                  res.render('signup',{
                     message: req.flash('signupMessage'),
                     rows: row,
                     rows2 : row2
                  });
+                });
+
+                
             });
 
         // }
@@ -120,27 +122,9 @@ exports.addGates= (req, res) => {
 };
 
 exports.getGates= (req,res)=>{
-        // console.log(req.user.id)
-        
-        // if (req.session.id == undefined || req.session.id == 0){
-            var row = [];
-            var row2 = [];
-            connection.query('select * from gate', function (err, rows) {
-                if (err) {
-                    console.log(err);
-                } else {
-                    if (rows.length) {
-                        for (var i = 0, len = rows.length; i < len; i++) {  //query den gelen bütün parametreleri rows sınıfına ekliyoruz .
-                            row[i] = rows[i];
-                            // console.log(row[i]);                        
-                        }  
-                    }
-                }
-                 res.render('gates',{
-                    message: req.flash('message'),
-                    rows: row
-                 });
-            });
+        res.render('gates',{
+            message: req.flash('message')
+         });
 };
 
 exports.getIdUser= (req,res)=>{
@@ -178,43 +162,25 @@ exports.getIdUser= (req,res)=>{
 
 };
 
-// exports.getIdGates=(req,res)=>{
-//     var id = req.params.id;
-//     console.log(id);
-// }
-
     exports.getLogout= (req,res)=>{
             req.logout();
             res.redirect('/');
     };
-    // app.get('/logout', function(req, res) {
-    //     req.logout();
-    //     res.redirect('/');
-    // });
 
     exports.getDelUser = (req,res)=>{
-
         var row = [];
         var row2=[];
         var id = req.params.id;
           // console.log("TES");
-          console.log(id);
+        console.log("MASUK delete");
         connection.query('delete from users where ID = ?',[id], function (err, rows) {
+            console.log("MASUK query delete");
+            
             if (err) {
                 console.log(err);
             } else {
-                if (rows.length) {
+                    console.log("harusnya ke user");
                      res.redirect('/users');
-
-                }
             }
-
-            // res.json(req.user.ID); 
-            // res.render('index.tl', {rows : row});
-            // req.send(req.params); 
-
         });
-
-        
- 
     };

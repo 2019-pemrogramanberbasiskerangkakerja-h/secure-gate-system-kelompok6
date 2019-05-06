@@ -36,7 +36,7 @@
 
 			</div>
 			<!-- href="/users/'+ row.ID +'" -->
-		<!-- 	${d.rows.reduce((str,row)=>str+ '<form action="/users/'+ row.ID +'?_method=DELETE" method="POST"><button type="submit"> delete</button></form>' , '')} -->
+			${d.rows.reduce((str,row)=>str+ '<form action="/users/'+ row.ID +'?_method=DELETE" method="POST"><button type="submit"> delete</button></form>' , '')}
 		</div>
 
 	</div>
