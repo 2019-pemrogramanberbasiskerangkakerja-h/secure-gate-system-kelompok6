@@ -10,7 +10,34 @@ var bcrypt = require('bcrypt-nodejs');
 
 exports.index= (req,res)=>{
         res.render('welcome.tl',{ message: req.flash('loginMessage') });
-        //res.redirect('/users');
+};
+
+exports.loginPage= (req,res)=>{
+       var row = [];
+        var row2=[];
+        var id = req.params.id;
+          // console.log("TES");
+          console.log(id);
+        connection.query('select * from users u , grup gr where id = ? and u.GR_ID = gr.GR_ID',[id], function (err, rows) {
+            if (err) {
+                console.log(err);
+            } else {
+                if (rows.length) {
+                    for (var i = 0, len = rows.length; i < len; i++) {  //query den gelen bütün parametreleri rows sınıfına ekliyoruz .
+                        row[i] = rows[i];
+                        
+                    }  
+                }
+                console.log(row);
+            }
+            res.render('index', {
+                    rows: row
+                });
+            // res.json(req.user.ID); 
+            // res.render('index.tl', {rows : row});
+            // req.send(req.params); 
+
+        });
 };
 
 exports.getUsers= (req,res)=>{
@@ -86,7 +113,7 @@ exports.getLogin= (req,res)=>{
                     }  
                 }
             }
-             res.render('login',{
+             res.render('login.tl',{
                 message: req.flash('loginMessage'),
                 rows: row
              });

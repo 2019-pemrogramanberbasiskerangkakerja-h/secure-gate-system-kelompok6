@@ -13,6 +13,7 @@ app.use(express.static("public"));
 module.exports = function(app,passport) {
 		
 	app.get('/' ,controller.index);
+	app.get('/login/:id' ,controller.loginPage);
 // user
 	//add user
 	app.post('/users', passport.authenticate('local-signup', {
@@ -38,8 +39,8 @@ module.exports = function(app,passport) {
 	app.post('/login', function(req, res, next){
 		var id =  req.body.id;
 		passport.authenticate('local-login', {
-                 session : false,
-            successRedirect: '/users/'+id,
+            session : false,
+            successRedirect: '/login/'+id,
             failureRedirect: '/login',
             failureFlash : true 
 		})(req, res, next);

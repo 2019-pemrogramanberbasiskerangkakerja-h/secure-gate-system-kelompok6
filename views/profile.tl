@@ -12,7 +12,7 @@
 <div class="container">
 
 	<div class="page-header text-center">
-		<h1><span class="fa fa-anchor"></span>Profile Page</h1>
+		<h1><span class="fa fa-anchor"></span>Info Profile Page</h1>
 
 <!-- 		${d.rows.reduce((str,row)=>str+'<a href="/users/'+ row.ID +'" class="btn btn-default btn-sm" method= "DELETE"> Delete</a>', '')}
 		<a href="/logout" class="btn btn-default btn-sm">Logout</a>
