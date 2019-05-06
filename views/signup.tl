@@ -53,10 +53,29 @@
 		<button type="submit" class="btn btn-warning btn-lg">Sign up</button>
 	</form>
 
+	<br>
+
 	<hr>
 
 	<p>Already have an account? <a href="/login">Login</a></p>
 	<p>Or go <a href="/">home</a>.</p>
+
+	<div>
+
+	<hr>
+
+<!-- <a href="/users/'+ row.ID +'/"> -->
+	<table style="width:100%">
+		  <tr>
+		    <th>NRP</th>
+		    <th>Username</th>
+		    <th>keterangan</th> 
+		  </tr>
+
+		${d.rows2.reduce((str,row)=> str + '  <tr> ' + '<td>' +row.ID +'</td>' + '<td>' +row.USERNAME +'</td>' + '<td> <a href="/users/'+ row.ID +'">info</a> </td>' +' </tr>', '')}		  
+		
+		</table>
+	</div>
 
 </div>
 

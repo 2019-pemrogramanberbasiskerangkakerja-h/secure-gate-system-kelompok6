@@ -16,7 +16,7 @@ exports.index= (req,res)=>{
 exports.getUsers= (req,res)=>{
         // console.log(req.user.id)
         
-        // if (req.user.ID === undefined || req.user.ID === 0){
+        // if (req.session.id == undefined || req.session.id == 0){
             var row = [];
             var row2 = [];
             connection.query('select * from grup', function (err, rows) {
@@ -30,9 +30,23 @@ exports.getUsers= (req,res)=>{
                         }  
                     }
                 }
+                    connection.query('select * from users ', function (err, rows) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        if (rows.length) {
+                            for (var i = 0, len = rows.length; i < len; i++) {  //query den gelen bütün parametreleri rows sınıfına ekliyoruz .
+                                row2[i] = rows[i];
+                                // console.log(row[i]);                        
+                            }  
+                        }
+                    }
+                });
+
                  res.render('signup',{
                     message: req.flash('signupMessage'),
-                    rows: row
+                    rows: row,
+                    rows2 : row2
                  });
             });
 
@@ -116,12 +130,13 @@ exports.getIdUser= (req,res)=>{
       // console.log(req.params.id);
       // res.status(200).send(req.params.id);
       // const id = parseInt(req.params.id, 10);
-      console.log(id);
+      // console.log(id);
        var row = [];
         var row2=[];
-          console.log("TES");
-          console.log(req.user.ID);
-        connection.query('select * from users u , grup gr where id = ? and u.GR_ID = gr.GR_ID',[req.user.ID], function (err, rows) {
+        var id = req.params.id;
+          // console.log("TES");
+          console.log(id);
+        connection.query('select * from users u , grup gr where id = ? and u.GR_ID = gr.GR_ID',[id], function (err, rows) {
             if (err) {
                 console.log(err);
             } else {
@@ -133,7 +148,7 @@ exports.getIdUser= (req,res)=>{
                 }
                 console.log(row);
             }
-            res.render('index', {
+            res.render('profile', {
                     rows: row
                 });
             // res.json(req.user.ID); 
@@ -141,4 +156,38 @@ exports.getIdUser= (req,res)=>{
             // req.send(req.params); 
 
         });
+
+
 };
+
+    exports.getLogout= (req,res)=>{
+            req.logout();
+            res.redirect('/');
+    };
+
+    exports.getDelUser = (req,res)=>{
+
+        var row = [];
+        var row2=[];
+        var id = req.params.id;
+          // console.log("TES");
+          console.log(id);
+        connection.query('delete from users where ID = ?',[id], function (err, rows) {
+            if (err) {
+                console.log(err);
+            } else {
+                if (rows.length) {
+                     res.redirect('/users');
+
+                }
+            }
+
+            // res.json(req.user.ID); 
+            // res.render('index.tl', {rows : row});
+            // req.send(req.params); 
+
+        });
+
+        
+ 
+    };

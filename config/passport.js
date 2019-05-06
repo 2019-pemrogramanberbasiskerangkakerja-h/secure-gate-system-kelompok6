@@ -93,28 +93,29 @@ module.exports = function(passport) {
              connection.query(insertQuery2,[id , gate ,time,time],function(err, rows){
                 console.log(rows);
             
-                if (err){
+                // if (err){
 
-                    connection.query(insertQuery,[newUserLogin.id, newUserLogin.gate , newUserLogin.L_DATE, newUserLogin.L_STATUS],function(err, rows) {
-                    });
-                    
-                    return done(err);
-                }
+                //     connection.query(insertQuery,[newUserLogin.id, newUserLogin.gate , newUserLogin.L_DATE, newUserLogin.L_STATUS],function(err, rows) {
+                //     });
 
-                if (!rows.length) {
-                    connection.query(insertQuery,[newUserLogin.id, newUserLogin.gate , newUserLogin.L_DATE, newUserLogin.L_STATUS],function(err, rows) {
-                    });
+                //     return done(err);
+                // }
 
-                    return done(null, false, req.flash('loginMessage', 'gagal login.'));    
-                }
+                // if (!rows.length) {
+                //     connection.query(insertQuery,[newUserLogin.id, newUserLogin.gate , newUserLogin.L_DATE, newUserLogin.L_STATUS],function(err, rows) {
+                //     });
+
+                //     return done(null, false, req.flash('loginMessage', 'gagal login.'));    
+                // }
 
                 
                 if (!bcrypt.compareSync(password, rows[0].PASSWORD)){
 
                     connection.query(insertQuery,[newUserLogin.id, newUserLogin.gate , newUserLogin.L_DATE, newUserLogin.L_STATUS],function(err, rows) {
                     });                
-                    return done(null, false, req.flash('loginMessage', 'password salah'));
+                    return done(null, 0 , req.flash('loginMessage', 'password salah'));
                 }
+
                var newUserLogin = {
                     id:id,
                     gate : gate, 

@@ -27,7 +27,7 @@ module.exports = function(app,passport) {
 	//Get info user
 	app.get('/users/:id', controller.getIdUser);
 	// Delete user
-	// app.delete('/users/:id', controller.users);
+	app.delete('/users/:id', controller.getDelUser);
 // auth-login
 
 	// app.post('/login', passport.authenticate('local-login', {
@@ -38,6 +38,7 @@ module.exports = function(app,passport) {
 	app.post('/login', function(req, res, next){
 		var id =  req.body.id;
 		passport.authenticate('local-login', {
+                 session : false,
             successRedirect: '/users/'+id,
             failureRedirect: '/login',
             failureFlash : true 
@@ -45,6 +46,7 @@ module.exports = function(app,passport) {
 	});
 	
 	app.get('/login', controller.getLogin);	
+	// app.get('/logout', controller.getLogout);		
 // Gate
 	app.post('/gates', controller.addGates);
 	app.get('/gates', controller.getGates);
