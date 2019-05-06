@@ -23,13 +23,13 @@ module.exports = function(app,passport) {
 	app.get('/users', controller.getUsers);
 	
 	//Get info user
-	// app.get('/users/:id', controller.users);
+	app.get('/users/:id', controller.getIdUser);
 	// Delete user
 	// app.delete('/users/:id', controller.users);
 
 // auth-login
 	app.post('/login', passport.authenticate('local-login', {
-            successRedirect: '/users',
+            successRedirect: '/users/:id',
             failureRedirect: '/login',
             failureFlash : true 
 	}));

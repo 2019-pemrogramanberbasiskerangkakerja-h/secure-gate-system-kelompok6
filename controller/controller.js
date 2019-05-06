@@ -79,7 +79,6 @@ exports.addGates= (req, res) => {
     let G_GATENAME = req.body.G_GATENAME;
     let G_OPEN = req.body.G_OPEN;
     let G_CLOSE = req.body.G_CLOSE;
-    let G_ROLE = req.body.role;
     // console.log(G_ROLE);
 
     let addQuery = "SELECT * FROM `gate` WHERE G_GATENAME = '" + G_GATENAME + "'";
@@ -88,16 +87,10 @@ exports.addGates= (req, res) => {
         if (err) {
             return res.status(500).send(err);
         }
-        // if (result.length > 0) {
-        //     message = 'Gate name already exists';
-        //     res.render('gates.tl', {
-        //         message,
-        //         title: Welcome to GERBANG IF | Add a new gates
-        //     });
-        // } 
+
         else {
-            let query = "INSERT INTO `gate` (G_GATENAME, G_OPEN, G_CLOSE, G_ROLE) VALUES ('" +
-                G_GATENAME + "', '" + G_OPEN + "', '" + G_CLOSE + "', '" + G_ROLE + "')";
+            let query = "INSERT INTO `gate` (G_GATENAME, G_OPEN, G_CLOSE) VALUES ('" +
+                G_GATENAME + "', '" + G_OPEN + "', '" + G_CLOSE + "')";
             connection.query(query, (err, result) => {
                 if (err) {
                     return res.status(500).send(err);
@@ -109,23 +102,37 @@ exports.addGates= (req, res) => {
 };
 
 exports.getGates= (req,res)=>{
-        var row = [];
-        var row2 = [];
+        res.render('gates',{
+            message: req.flash('message')
+         });
+};
 
-        connection.query('select * from grup', function (err, rows) {
+exports.getIdUser= (req,res)=>{
+      // req.params.id = req.user.ID;
+      // console.log(req.params.id);
+      // res.status(200).send(req.params.id);
+      const id = parseInt(req.params.id, 10);
+      console.log(id);
+       var row = [];
+        var row2=[];
+          console.log("TES");
+          console.log(req.user.ID);
+        connection.query('select * from users u , grup gr where id = ? and u.GR_ID = gr.GR_ID',[req.user.ID], function (err, rows) {
             if (err) {
                 console.log(err);
             } else {
                 if (rows.length) {
                     for (var i = 0, len = rows.length; i < len; i++) {  //query den gelen bütün parametreleri rows sınıfına ekliyoruz .
                         row[i] = rows[i];
-                        // console.log(row[i]);                        
+                        
                     }  
                 }
+                console.log(row);
             }
-             res.render('gates',{
-                message: req.flash('message'),
-                rows: row
-             });
+            res.render('index', {
+                    rows: row
+                });
+            // res.render('index.tl', {rows : row});  
+
         });
 };

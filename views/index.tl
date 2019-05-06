@@ -16,39 +16,23 @@
 		<a href="/logout" class="btn btn-default btn-sm">Logout</a>
 	</div>
 
-	<div class="row">
+		<div class="row">
 
 		<!-- LOCAL INFORMATION -->
 		<div class="col-sm-3"></div>
 		<div class="col-sm-6">
 			<div class="well">
-				<h3><span class="fa fa-user"></span>Berhasil Masuk Pintu Utama</h3>
+				<h3><span class="fa fa-user"></span> Local</h3>
 					<p>
-
-					 	<!-- <table> -->
-						  <thead>
-						    <tr>
-						      <th class='prop__name' data-prop-name='id'>NRP ${d.nrp}</th>
-						      <br>
-						      <th class='prop__name' data-prop-name='username'>Nama ${d.nama} </th>
-						      <br>
-						      <th class='prop__name' data-prop-name='role'>Role ${d.role}</th>
-						      <br>
-						    </tr>
-						  </thead>
-						<!-- </table> -->
-
-						<script type="text/javascript">
-							
-						</script>
-
+	${d.rows.reduce((str,row)=> str + '<strong>'+ 'NRP : ' + row.ID +'</strong> <br>'
+		+ '<strong>'+ 'Username : ' + row.USERNAME +'</strong> <br>'
+		+ '<strong>'+ 'Role : ' + row.GR_ROLE +'</strong> <br>'
+	, '')}						 
 				 	</p>
 
 			</div>
 		</div>
 
 	</div>
-
-</div>
 </body>
 </html>

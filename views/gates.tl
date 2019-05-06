@@ -22,13 +22,6 @@
                     <label class="m-2">Gate's Name</label>                   
                     <input type="text" class="form-control" placeholder="Gate's Name"  name="G_GATENAME">
                 </div>
-                <div class="form-group">
-                    <label class="m-2">Role</label>
-                    <select id="status" class="form-control" name="role" required>
-                        <option value="" disabled selected>Silahkan memilih role</option>
-                        ${d.rows.reduce((str,row)=> str + '<option value= "'+ row.GR_ID +'">'+ row.GR_ROLE +'</option>', '')}
-                    </select>
-                </div> 
                 <div class="form-group">                    
                     <label for="G_OPEN" class="m-2">Time Open Gate :</label>
                     <input type="time" id="G_OPEN" name="G_OPEN" min="1:00" max="24:00" required>
