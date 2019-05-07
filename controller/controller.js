@@ -142,7 +142,7 @@ exports.addGates= (req, res) => {
                 if (err) {
                     return res.status(500).send(err);
                 }
-                res.redirect('/');
+                res.redirect('/gates');
             });
         }
     });
@@ -270,13 +270,105 @@ exports.getIdUser= (req,res)=>{
           // console.log("TES");
         console.log("MASUK delete");
 
-        connection.query('delete from gate where g_id = ?',[id], function (err, rows) {
-            console.log("MASUK query delete");            
+        connection.query('select * from hak_akses where g_id = ?',[id], function (err, rows) {
             if (err) {
                 console.log(err);
             } else {
-                    console.log("harusnya ke user");
-                     res.redirect('/gates');
+                if (!rows.length) {
+                            connection.query('delete from gate where g_id = ?',[id], function (err, rows) {
+                            console.log("MASUK query delete");            
+                            if (err) {
+                                console.log(err);
+                            } else {
+                                    console.log("harusnya ke user");
+                                     res.redirect('/gates');
+                            }
+                        });
+  
+                }else{
+                    connection.query('delete from hak_akses where g_id = ?',[id], function (err, rows) {
+                            console.log("MASUK query delete");            
+                            if (err) {
+                                console.log(err);
+                            } else {
+                            connection.query('delete from gate where g_id = ?',[id], function (err, rows) {
+                            console.log("MASUK query delete");            
+                            if (err) {
+                                console.log(err);
+                            } else {
+                                   console.log("harusnya ke user");
+                                     res.redirect('/gates');       
+                            }
+                        });
+                                    
+                            }
+                        });
+                }
+
             }
+        });
+
+    };
+
+exports.addHakAkses= (req,res)=>{
+    var role = req.body.role;
+    var gate = req.body.gate;
+    console.log("masuk");
+
+    var addQuery = "SELECT * FROM `gate` WHERE G_ID = '" + gate + "'";
+
+    // let query = "INSERT INTO `hak_akses` (GR_ID, G_ID) VALUES (? , ?)";
+    console.log(role);
+    console.log(gate);
+    var insertQuery = "INSERT INTO `hak_akses` (GR_ID, G_ID) VALUES ('" + role + "' , '" + gate + "')";
+    
+    connection.query(insertQuery, (err, result) => {
+    console.log("masuk query");
+        if (err) {
+                console.log(err);
+        }
+        res.redirect('/');
+    });
+
+    };
+
+exports.getHakAkses= (req,res)=>{
+        var row = [] ;
+        var row2 = [] ;
+
+        connection.query('select * from gate', function (err, rows) {
+            if (err) {
+                console.log(err);
+            } else {
+                if (rows.length) {
+                    for (var i = 0, len = rows.length; i < len; i++) {  //query den gelen bütün parametreleri rows sınıfına ekliyoruz .
+                        row[i] = rows[i];
+
+                    }  
+                }
+            }
+             connection.query('select * from grup', function (err, rows) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    if (rows.length) {
+                        for (var i = 0, len = rows.length; i < len; i++) {  //query den gelen bütün parametreleri rows sınıfına ekliyoruz .
+                            row2[i] = rows[i];
+                         
+                        }  
+                    }
+                }
+                console.log(row);                        
+                console.log(row2);
+                res.render('HakAkses.tl',{
+                    message: req.flash('signupMessage'),
+                    rows: row,
+                    rows2 : row2
+                 });
+
+                
+            });
+
+ 
         });
     };

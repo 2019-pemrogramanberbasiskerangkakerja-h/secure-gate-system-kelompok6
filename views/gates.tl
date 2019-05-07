@@ -29,7 +29,9 @@
                 <div class="form-group">                    
                     <label for="G_CLOSE" class="m-2">Time Close Gate :</label>
                     <input type="time" id="G_CLOSE" name="G_CLOSE" min="1:00" max="24:00" required>
-                </div>               
+                </div>   
+
+          
                 <button type="submit" class="btn btn-warning btn-lg">Add</button>
             </form>
 
@@ -41,12 +43,8 @@
                     <th>Time Close Gate</th>
                     <th>Action</th> 
                   </tr>
-
                 ${d.rows.reduce((str,row)=> str + '  <tr> ' + '<td>' +row.G_GATENAME +'</td>' + '<td>' +row.G_OPEN +'</td>' + '<td>' +row.G_CLOSE +'</td>' + '<td> <a href="/gates/'+ row.G_ID +'">info</a> </td>' +' </tr>', '')}          
-        
-                   
             </table>
-
         </div>
     </div>
 </body>

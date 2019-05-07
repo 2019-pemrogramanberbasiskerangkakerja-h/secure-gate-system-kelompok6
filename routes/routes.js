@@ -55,6 +55,11 @@ module.exports = function(app,passport) {
 	app.delete('/gates/:g_id', controller.getDelGate);
 
 	app.get('/logout', controller.getLogout);
+
+
+	app.post('/hakakses', controller.addHakAkses);
+	app.get('/hakakses', controller.getHakAkses);
+
 	return route;
 
 };
