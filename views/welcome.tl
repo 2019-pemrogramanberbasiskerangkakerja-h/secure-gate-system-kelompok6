@@ -33,6 +33,7 @@
 			<li><a href="#welcomepage"></a></li>
 			<li><a href="/login">LOGIN</a></li>
 			<li><a href="/users">SIGNUP</a></li>
+			<li><a href="/gates">GATE</a></li>
 			<li><a href="#contactpage"></a></li>
 		</ul>
 	</nav>

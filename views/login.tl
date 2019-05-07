@@ -39,7 +39,7 @@
 
             <hr>
 
-            <p>New user? <a href="/users">Register</a></p>
+<!--             <p>New user? <a href="/users">Register</a></p> -->
         </div>
     </div>
 </body>

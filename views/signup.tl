@@ -54,17 +54,15 @@
 	</form>
 
 	<br>
-
+<!-- 
 	<hr>
 
 	<p>Already have an account? <a href="/login">Login</a></p>
 	<p>Or go <a href="/">home</a>.</p>
-
+ -->
 	<div>
 
 	<hr>
-
-<!-- <a href="/users/'+ row.ID +'/"> -->
 	<table style="width:100%">
 		  <tr>
 		    <th>NRP</th>
