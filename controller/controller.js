@@ -149,9 +149,27 @@ exports.addGates= (req, res) => {
 };
 
 exports.getGates= (req,res)=>{
-        res.render('gates',{
-            message: req.flash('message')
+        // res.render('gates',{
+        //     message: req.flash('message')
+        //  });
+        var row = [];
+            connection.query('select * from gate ', function (err, rows) {
+            if (err) {
+                console.log(err);
+            } else {
+                if (rows.length) {
+                    for (var i = 0, len = rows.length; i < len; i++) {  //query den gelen bütün parametreleri rows sınıfına ekliyoruz .
+                        row[i] = rows[i];
+                        // console.log(row[i]);                        
+                    }  
+                }
+            }
+        
+         res.render('gates.tl',{
+            message: req.flash('signupMessage'),
+            rows: row
          });
+        });        
 };
 
 exports.getIdUser= (req,res)=>{
@@ -208,6 +226,57 @@ exports.getIdUser= (req,res)=>{
             } else {
                     console.log("harusnya ke user");
                      res.redirect('/users');
+            }
+        });
+    };
+
+    exports.getIdGate= (req,res)=>{
+      // req.params.id = req.user.ID;
+      // console.log(req.params.id);
+      // res.status(200).send(req.params.id);
+      // const id = parseInt(req.params.id, 10);
+      // console.log(id);
+       var row = [];
+        var row2=[];
+        var id = req.params.g_id;
+          console.log("TES");
+          console.log(id);
+        connection.query('select * from gate where g_id = ?',[id], function (err, rows) {
+            if (err) {
+                console.log(err);
+            } else {
+                if (rows.length) {
+                    for (var i = 0, len = rows.length; i < len; i++) {  //query den gelen bütün parametreleri rows sınıfına ekliyoruz .
+                        row[i] = rows[i];
+                        
+                    }  
+                }
+                console.log(row);
+            }
+            res.render('gate', {
+                    rows: row
+                });
+            // res.json(req.user.ID); 
+            // res.render('index.tl', {rows : row});
+            // req.send(req.params); 
+
+        });
+    };
+
+    exports.getDelGate=(req,res)=>{
+        var row = [];
+        var row2=[];
+        var id = req.params.g_id;
+          // console.log("TES");
+        console.log("MASUK delete");
+
+        connection.query('delete from gate where g_id = ?',[id], function (err, rows) {
+            console.log("MASUK query delete");            
+            if (err) {
+                console.log(err);
+            } else {
+                    console.log("harusnya ke user");
+                     res.redirect('/gates');
             }
         });
     };

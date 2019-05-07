@@ -51,8 +51,8 @@ module.exports = function(app,passport) {
 // Gate
 	app.post('/gates', controller.addGates);
 	app.get('/gates', controller.getGates);
-	// app.get('/gates/:g_id', controller.users);n
-	// app.delete('/gates/:g_id', controller.users);
+	app.get('/gates/:g_id', controller.getIdGate);
+	app.delete('/gates/:g_id', controller.getDelGate);
 
 	app.get('/logout', controller.getLogout);
 	return route;

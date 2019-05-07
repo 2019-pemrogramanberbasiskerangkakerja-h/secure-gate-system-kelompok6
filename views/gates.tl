@@ -43,7 +43,8 @@
                   </tr>
 
                 ${d.rows.reduce((str,row)=> str + '  <tr> ' + '<td>' +row.G_GATENAME +'</td>' + '<td>' +row.G_OPEN +'</td>' + '<td>' +row.G_CLOSE +'</td>' + '<td> <a href="/gates/'+ row.G_ID +'">info</a> </td>' +' </tr>', '')}          
-                
+        
+                   
             </table>
 
         </div>
