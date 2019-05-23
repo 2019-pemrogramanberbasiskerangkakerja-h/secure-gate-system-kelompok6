@@ -5,6 +5,7 @@ var bcrypt = require('bcrypt-nodejs');
 var dbconfig = require('./database');
 var connection = mysql.createConnection(dbconfig.connection);
 
+
 connection.query('USE ' + dbconfig.database);
 
 module.exports = function(passport) {
@@ -81,8 +82,9 @@ module.exports = function(passport) {
             var password = req.body.password;     
             var today = new Date();
             var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-
-
+            console.log(id);
+            console.log(gate);
+            console.log(password);
              connection.query(insertQuery2,[id , gate ,time,time],function(err, rows){
                 console.log(rows);
 
@@ -96,7 +98,7 @@ module.exports = function(passport) {
             
                 if (err){
                      connection.query(insertQuery,[newUserLogin.id, newUserLogin.gate , newUserLogin.L_DATE, newUserLogin.L_STATUS],function(err, rows) {
-                                console.log("berhasil");
+                                // console.log("berhasil");
                             });
 
                     console.log("masuk error ?");
@@ -106,7 +108,7 @@ module.exports = function(passport) {
 
                 if (!rows.length) {
                 connection.query(insertQuery,[newUserLogin.id, newUserLogin.gate , newUserLogin.L_DATE, newUserLogin.L_STATUS],function(err, rows) {
-                    console.log("berhasil");
+                    // console.log("berhasil");
                 });
 
                     console.log("masuk kosong ?");
@@ -133,10 +135,10 @@ module.exports = function(passport) {
                 console.log("kenapa");
 
                 connection.query(insertQuery,[newUserLogin.id, newUserLogin.gate , newUserLogin.L_DATE, newUserLogin.L_STATUS],function(err, rows) {
-                    console.log("berhasil");
+                    // console.log("berhasil");
                 });
 
-                return done(null, rows[0]);  
+                return done(null, rows[0] , req.flash('loginMessage', 'berhasill'));  
 
             });
         })
